@@ -1,6 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 const SignInPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center p-10 min-h-screen space-y-12">
       <div className="flex flex-col justify-center mx-auto w-full pb-12 md:pb-0 px-4 md:px-10 lg:px-20 border-[#81d8d0] border-b-[1px] md:border-b-0 md:border-r-[1px] ">
@@ -10,30 +20,31 @@ const SignInPage = () => {
             Please sign in to your Timeless Account
           </p>
         </div>
-        <form action="" className="space-y-10">
-          <div>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Email"
-              className="w-full p-1 border-black border-b-[1px] outline-none"
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              className="w-full p-1 border-black border-b-[1px] outline-none"
-            />
-          </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full p-1 border-black border-b-[1px] outline-none"
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+          />
+          {errors.email?.type === "required" && (
+            <p className="text-red-500">email is required</p>
+          )}
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full p-1 border-black border-b-[1px] outline-none"
+            {...register("password", { required: true})}
+          />
+          {errors.password?.type === "required" && (
+            <p className="text-red-500">password is required</p>
+          )}
 
           <div className="space-y-2">
             <div>
               <button
-                type="button"
+                type="submit"
                 className="w-full px-8 py-3 font-semibold bg-black hover:bg-[#81d8d0] text-white hover:text-black transition-all duration-300"
               >
                 Sign in
