@@ -6,16 +6,34 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6, {
-    message: "password must be 6 characters",
-  }),
-});
+const formSchema = z
+  .object({
+    name: z
+      .string({ required_error: "name is required" })
+      .min(3, { message: "name at least 3 characters" }),
+    email: z.string().email(),
+    password: z
+      .string({ required_error: "password is required" })
+      .min(6, { message: "password must be 6 or more long" }),
+    confirmPassword: z.string({
+      required_error: "confirm password is required",
+    }),
+    phoneNumber: z.string({ required_error: "phone number is required" }),
+    image: z.string({ required_error: "image is required" }),
+  })
+  .refine(
+    (values) => {
+      return values.password === values.confirmPassword;
+    },
+    {
+      message: "Confirm passwords does not match!",
+      path: ["confirmPassword"],
+    }
+  );
 
 type SignInFormValues = z.infer<typeof formSchema>;
 
-const SignIn = () => {
+const SignUp = () => {
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -84,23 +102,9 @@ const SignIn = () => {
         </Form>
       </div>
 
-      <div className="px-4 md:px-12 lg:px-20 text-center md:text-left min-h-[250px]">
-        <h1 className="text-2xl lg:text-3xl">Create an Account</h1>
-        <p className="text-sm font-light my-2">
-          Save time during checkout, view your shopping bag and saved items from
-          any device and access your order history.
-        </p>
-        <Link href={"/signUp"}>
-          <button
-            type="button"
-            className="w-full px-8 py-3 mt-4 font-semibold bg-black hover:bg-[#81d8d0] text-white hover:text-black transition-all duration-300"
-          >
-            Sign Up
-          </button>
-        </Link>
-      </div>
+      <div className="px-4 md:px-12 lg:px-20 text-center md:text-left min-h-[250px]"></div>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;
