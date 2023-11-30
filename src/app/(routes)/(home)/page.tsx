@@ -1,13 +1,5 @@
-import Banner from "@/components/banner";
-import GoToTop from "@/components/goToTop";
-
 const HomePage = () => {
-  return (
-    <div>
-      This is home <GoToTop />
-      <Banner />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default HomePage;
