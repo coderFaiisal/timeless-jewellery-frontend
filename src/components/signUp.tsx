@@ -1,11 +1,25 @@
 "use client";
 
 import * as z from "zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
+import { useState } from "react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import CustomImage from "./customImage";
 import signUp from "@/assets/Sign-up.png";
+import { Input } from "./ui/input";
+import ImageUpload from "./imageUpload";
+import { Button } from "./ui/button";
+import Loader from "./loader";
+import { RingLoader } from "react-spinners";
+import { Separator } from "./ui/separator";
 
 const formSchema = z
   .object({
@@ -35,6 +49,8 @@ const formSchema = z
 type SignInFormValues = z.infer<typeof formSchema>;
 
 const SignUp = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {},
@@ -45,28 +61,84 @@ const SignUp = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center p-10 min-h-screen space-y-12">
-      <div className="flex flex-col justify-center mx-auto w-full pb-12 md:pb-0 px-4 md:px-10 lg:px-20 border-[#81d8d0] border-b-[1px] md:border-b-0 md:border-r-[1px] ">
-        <div className="mb-8 text-center md:text-left">
-          <h1 className="my-1 text-2xl lg:text-3xl">Create an Account</h1>
-          <p className="text-sm font-light text-gray-600">
-            With a Timeless account, you can save time during checkout, access
-            your shopping bag from any device and view your order history.
-          </p>
-        </div>
+    <div className="p-8 lg:p-16">
+      <div>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+          Create an Account
+        </h2>
+        <p className="text-sm text-muted-foreground">
+          With a Timeless account, you can save time during checkout, access
+          your shopping bag from any device and view your order history.
+        </p>
+      </div>
+      <Separator className="my-6" />
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
+          <FormField
+            control={form.control}
+            name="image"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Profile Image</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    value={field.value ? [field.value] : []}
+                    disabled={loading}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="Your Name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <input
-                      placeholder="Email"
+                    <Input placeholder="Your Email" type="email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="Phone Number"
                       {...field}
-                      className="w-full p-1 border-black border-b-[1px] outline-none"
                     />
                   </FormControl>
                   <FormMessage />
@@ -79,11 +151,13 @@ const SignUp = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <input
-                      placeholder="Password"
+                    <Input
+                      disabled={loading}
+                      placeholder="Your password"
+                      type="password"
                       {...field}
-                      className="w-full p-1 border-black border-b-[1px] outline-none"
                     />
                   </FormControl>
                   <FormMessage />
@@ -91,22 +165,39 @@ const SignUp = () => {
               )}
             />
 
-            <button
-              type="submit"
-              className="w-full px-8 py-3 font-semibold bg-black hover:bg-[#81d8d0] text-white hover:text-black transition-all duration-300"
-            >
-              Sign in
-            </button>
-          </form>
-          <p className="pt-4 text-xs hover:underline underline-offset-4 cursor-pointer">
-            Forgot your password?
-          </p>
-        </Form>
-      </div>
-
-      <div className="px-4 md:px-12 lg:px-20 text-center md:text-left min-h-[250px]">
-        <CustomImage src={signUp} alt="sign up" />
-      </div>
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="Confirm password"
+                      type="password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button disabled={loading} className="ml-auto" type="submit">
+            {loading ? (
+              <>
+                Sign Up
+                <Loader className="h-full w-full">
+                  <RingLoader color="#ffffff" size={30} />
+                </Loader>
+              </>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 };
