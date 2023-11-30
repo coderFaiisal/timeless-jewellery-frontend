@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className={`${inter.className} no-scrollbar`}>
+        <body className={`${inter.className} max-w-7xl mx-auto `}>
           {children}
           <Toaster position="top-right" closeButton richColors />
         </body>

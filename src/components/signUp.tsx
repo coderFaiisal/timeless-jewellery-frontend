@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { ArrowBigRight } from "lucide-react";
 import { useState } from "react";
 import {
   Form,
@@ -20,6 +21,7 @@ import { Button } from "./ui/button";
 import Loader from "./loader";
 import { RingLoader } from "react-spinners";
 import { Separator } from "./ui/separator";
+import Link from "next/link";
 
 const formSchema = z
   .object({
@@ -70,6 +72,14 @@ const SignUp = () => {
           With a Timeless account, you can save time during checkout, access
           your shopping bag from any device and view your order history.
         </p>
+        <div className="flex items-center mt-4 space-x-3 text-sm font-semibold ">
+          <p>Already have a Timeless account?</p>
+          <Link href={"/signIn"}>
+            <Button variant={"outline"} className="flex items-center">
+              Sign In <ArrowBigRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </div>
       </div>
       <Separator className="my-6" />
       <Form {...form}>
