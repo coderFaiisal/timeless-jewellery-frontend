@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface ImageProps {
-  src: string;
+  src: string | StaticImageData;
   alt: string;
   priority?: boolean;
   className?: string;
