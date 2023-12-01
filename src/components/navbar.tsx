@@ -9,6 +9,7 @@ import logo from "../assets/logo.png";
 import { MainNav } from "./mainNav";
 import AdminProfile from "./adminProfile";
 import Cart from "./cart";
+import { Search } from "./search";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +49,8 @@ const Navbar = () => {
         </div>
 
         <div className="ml-auto flex items-center space-x-4">
-          <MainNav />
+          <MainNav onClose={closeMenu} />
+          <Search />
           <Cart />
           <AdminProfile />
         </div>
@@ -65,11 +67,11 @@ const Navbar = () => {
 
         <div
           className={cn(
-            " absolute top-16 w-full p-4 md:p-0 bg-slate-50",
+            " absolute top-16 w-full min-h-screen bg-slate-50 p-6  ",
             isOpen ? "block " : "hidden"
           )}
         >
-          <MainNav />
+          <MainNav onClose={closeMenu} />
         </div>
 
         <div className="m-auto">

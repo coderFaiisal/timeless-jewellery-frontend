@@ -16,7 +16,7 @@ export default function Cart() {
   return (
     <Sheet>
       <SheetTrigger>
-        <ShoppingCart size="25" />
+        <ShoppingCart className=" text-muted-foreground" />
       </SheetTrigger>
       <SheetContent className="overflow-auto">
         <SheetHeader>
