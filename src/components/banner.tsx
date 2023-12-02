@@ -74,7 +74,7 @@ const Banner = () => {
         clickable: true,
       }}
       modules={[Pagination, Autoplay]}
-      className="mySwiper w-full h-full"
+      className="mySwiper w-full h-full cursor-pointer"
     >
       {items?.map((item) => (
         <SwiperSlide key={item?.name}>

@@ -67,7 +67,7 @@ const Navbar = () => {
 
         <div
           className={cn(
-            " absolute top-16 w-full min-h-screen bg-slate-50 p-6  ",
+            " absolute top-16 w-full min-h-screen bg-slate-50 p-6 z-50  ",
             isOpen ? "block " : "hidden"
           )}
         >
@@ -78,7 +78,8 @@ const Navbar = () => {
           <CustomImage src={logo} alt="logo image" className="w-20 h-10" />
         </div>
 
-        <div className="flex space-x-4 absolute right-4">
+        <div className="flex space-x-4 items-center absolute right-4">
+          <Search />
           <Cart />
           <AdminProfile />
         </div>

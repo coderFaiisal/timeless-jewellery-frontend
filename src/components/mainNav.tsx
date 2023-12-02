@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-
 import { cn } from "@/lib/utils";
 
 import {
@@ -91,7 +90,7 @@ export function MainNav({ onClose }: MainNavProps) {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[450px] md:grid-cols-2 lg:w-[500px] ">
+            <ul className="grid gap-3 p-4 md:w-[400px] md:grid-cols-2 lg:w-[500px] ">
               {components.map((component) => (
                 <ListItem
                   key={component.title}
