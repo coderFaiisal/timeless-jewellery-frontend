@@ -8,7 +8,7 @@ import banner3 from "../assets/banner-3.jpg";
 import banner4 from "../assets/banner-4.jpg";
 import banner5 from "../assets/banner-5.jpg";
 import banner6 from "../assets/banner-6.jpg";
-import Image from "next/image";
+
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
@@ -74,27 +74,21 @@ const Banner = () => {
         clickable: true,
       }}
       modules={[Pagination, Autoplay]}
-      className="mySwiper w-full h-80 lg:h-screen"
+      className="mySwiper w-full h-full"
     >
       {items?.map((item) => (
         <SwiperSlide key={item?.name}>
-          <Image
-            src={item?.link}
-            alt={item?.name}
-            className="w-full h-80 md:h-96 lg:h-screen "
-            style={{}}
-            width={500}
-            height={500}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-70"></div>
-          <div className="absolute top-10 lg:top-44 left-5 lg:left-20 text-white">
-            <p className="w-1/2 m-4 text-3xl">{item?.title}</p>
-            <p className="w-1/2 m-4 h-12 overflow-auto no-scrollbar">
-              {item?.description}
-            </p>
-            <p className="py-1 px-2 m-4 text-center  bg-black text-white w-24">
-              Buy Now
-            </p>
+          <div className="p-4 sm:p-6 mb-4 lg:p-8 rounded-xl overflow-hidden">
+            <div
+              style={{ backgroundImage: `url(${item.link})` }}
+              className="rounded-xl relative aspect-[2.4/1] overflow-hidden bg-cover bg-red-50"
+            >
+              <div className="h-full w-full flex flex-col justify-center items-center text-center">
+                <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
+                  {item.title}
+                </div>
+              </div>
+            </div>
           </div>
         </SwiperSlide>
       ))}
