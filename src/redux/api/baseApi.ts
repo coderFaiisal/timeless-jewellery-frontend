@@ -1,8 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { axiosBaseQuery } from "@/helpers/axios/axiosBaseQuery";
+import { getBaseUrl } from "@/helpers/config/envConfig";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "" }),
+  baseQuery: axiosBaseQuery({ baseUrl: getBaseUrl() }),
   endpoints: () => ({}),
-  tagTypes: ["user","product","productReview", "order"],
+  tagTypes: ["user", "product", "productReview", "order"],
 });
