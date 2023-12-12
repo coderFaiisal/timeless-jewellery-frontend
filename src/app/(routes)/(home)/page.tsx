@@ -1,8 +1,15 @@
+"use client";
+
 import Banner from "@/components/banner";
 import FeaturedContents from "@/components/featuredContents";
 import Policies from "@/components/policies";
+import { storeId } from "@/constants/storeId";
+import { useGetAllProductsQuery } from "@/redux/api/product/productApi";
 
 const HomePage = () => {
+  const { data } = useGetAllProductsQuery(storeId);
+  console.log("product data : ", data);
+
   return (
     <div>
       <Banner />

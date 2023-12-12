@@ -4,7 +4,7 @@ const orderApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createOrder: build.mutation({
       query: (orderData) => ({
-        url: "orders/create-order",
+        url: "/orders/create-order",
         method: "POST",
         data: orderData,
       }),
@@ -12,21 +12,21 @@ const orderApi = baseApi.injectEndpoints({
 
     getAllOrders: build.query({
       query: (storeId) => ({
-        url: `orders/${storeId}`,
+        url: `/orders/${storeId}`,
         method: "GET",
       }),
     }),
 
     getSingleOrder: build.query({
       query: (id) => ({
-        url: `orders/single-order/${id}`,
+        url: `/orders/single-order/${id}`,
         method: "GET",
       }),
     }),
 
     updateOrder: build.mutation({
       query: ({ id, updatedData }) => ({
-        url: `orders/${id}`,
+        url: `/orders/${id}`,
         method: "PATCH",
         data: updatedData,
       }),
@@ -34,7 +34,7 @@ const orderApi = baseApi.injectEndpoints({
 
     deleteOrder: build.mutation({
       query: (id) => ({
-        url: `orders/${id}`,
+        url: `/orders/${id}`,
         method: "DELETE",
       }),
     }),

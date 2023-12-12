@@ -4,14 +4,14 @@ const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getUserProfile: build.query({
       query: () => ({
-        url: "users/my-profile",
+        url: "/users/my-profile",
         method: "GET",
       }),
     }),
 
     updateUserProfile: build.mutation({
       query: (updatedData) => ({
-        url: "users/my-profile",
+        url: "/users/my-profile",
         method: "PATCH",
         data: updatedData,
       }),
@@ -19,7 +19,7 @@ const userApi = baseApi.injectEndpoints({
 
     deleteUserProfile: build.mutation({
       query: (id) => ({
-        url: `users/${id}`,
+        url: `/users/${id}`,
         method: "DELETE",
       }),
     }),

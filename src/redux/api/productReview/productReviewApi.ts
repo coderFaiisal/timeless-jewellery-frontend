@@ -4,7 +4,7 @@ const productReviewApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createProductReview: build.mutation({
       query: ({ id, reviewData }) => ({
-        url: `productReviews/${id}`,
+        url: `/productReviews/${id}`,
         method: "POST",
         data: reviewData,
       }),
@@ -13,7 +13,7 @@ const productReviewApi = baseApi.injectEndpoints({
 
     updateProductReview: build.mutation({
       query: ({ id, updatedData }) => ({
-        url: `productReviews/${id}`,
+        url: `/productReviews/${id}`,
         method: "PATCH",
         data: updatedData,
       }),
@@ -22,7 +22,7 @@ const productReviewApi = baseApi.injectEndpoints({
 
     deleteProductReview: build.mutation({
       query: (id) => ({
-        url: `productReviews/${id}`,
+        url: `/productReviews/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["productReview"],
