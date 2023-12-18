@@ -3,6 +3,8 @@
 import Banner from "@/components/banner";
 import BlogPost from "@/components/blogPost";
 import FeaturedContents from "@/components/featuredContents";
+import GoToTop from "@/components/goToTop";
+import NewArrival from "@/components/newArrival";
 import Policies from "@/components/policies";
 import Testimonial from "@/components/testimonial";
 import { storeId } from "@/constants/storeId";
@@ -18,8 +20,10 @@ const HomePage = () => {
         <Policies />
         <h3 className="font-bold text-3xl text-center">Featured Contents</h3>
         <FeaturedContents />
+        <NewArrival />
         <BlogPost />
         <Testimonial />
+        <GoToTop />
       </div>
     </div>
   );
