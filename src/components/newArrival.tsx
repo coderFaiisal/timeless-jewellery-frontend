@@ -7,6 +7,8 @@ import { storeId } from "@/constants/storeId";
 const NewArrival = () => {
   const { data: products = [] } = useGetAllProductsQuery(storeId);
 
+  console.log(products);
+
   return (
     <div className=" min-h-96 my-6 lg:my-12">
       <div className="text-center pt-8">
@@ -20,13 +22,13 @@ const NewArrival = () => {
           <div key={product?.title}>
             <div className="">
               <CustomImage
-                src={product?.image}
+                src={product?.images[0]}
                 alt="feature image"
                 className="w-full h-60 lg:h-56"
               />
             </div>
             <div className="mt-2 text-center">
-              <h1 className="text-sm opacity-60">{product?.title}</h1>
+              <h1 className="text-sm opacity-60">{product?.categoryId?.name}</h1>
               <h1>{product?.name}</h1>
               <p>$ {product?.price}</p>
             </div>
