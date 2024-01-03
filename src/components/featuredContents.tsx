@@ -38,12 +38,19 @@ const FeaturedContents = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-4/5 mx-auto">
       {contents.map((content) => (
-        <div key={content?.title} className="relative hover:opacity-70 cursor-pointer">
-          <div className="">
-            <CustomImage src={content?.image} alt="feature image" />
+        <div
+          key={content?.title}
+          className="relative hover:opacity-70 cursor-pointer"
+        >
+          <div className="overflow-hidden rounded-lg ">
+            <CustomImage
+              src={content?.image}
+              alt="feature image"
+              className="hover:scale-105 transition-all duration-300"
+            />
           </div>
           <div className="absolute right-4 md:right-2 lg:right-5 top-10 z-50">
-            <h2 className="text-xs lg:text-md font-semibold opacity-30">
+            <h2 className="text-xs lg:text-md font-semibold opacity-50">
               {content?.title}
             </h2>
             <h1 className="text-sm lg:text-xl py-2 font-semibold ">
