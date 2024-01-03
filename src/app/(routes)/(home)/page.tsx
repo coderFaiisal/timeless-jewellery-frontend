@@ -19,10 +19,12 @@ const HomePage = () => {
 
       <div className="my-4 space-y-6">
         <Policies />
-        <h3 className="font-bold text-xl md:text-2xl lg:text-3xl text-center">
-          Featured Contents
-        </h3>
-        <FeaturedContents />
+        <div>
+          <h3 className="font-bold text-xl md:text-2xl lg:text-3xl text-center">
+            Featured Contents
+          </h3>
+          <FeaturedContents />
+        </div>
         <NewArrival />
         <BlogPost />
         <Testimonial />

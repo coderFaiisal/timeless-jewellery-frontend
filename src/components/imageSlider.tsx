@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,12 +8,29 @@ import { useEffect, useState } from "react";
 import { Pagination } from "swiper/modules";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import CustomImage from "./customImage";
+
+import { MouseEventHandler } from "react";
+import { Expand, ShoppingCart } from "lucide-react";
+import IconButton from "./ui/iconButton";
 
 interface ImageSliderProps {
   urls: string[];
 }
 
 const ImageSlider = ({ urls }: ImageSliderProps) => {
+  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    // previewModal.onOpen(data);
+  };
+
+  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    // cart.addItem(data);
+  };
+
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -70,12 +86,20 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
         </button>
       </div>
 
+      <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5 z-10">
+        <div className="flex gap-x-6 justify-center">
+          <IconButton
+            onClick={onPreview}
+            icon={<Expand size={20} className="text-gray-600" />}
+          />
+          <IconButton
+            onClick={onAddToCart}
+            icon={<ShoppingCart size={20} className="text-gray-600" />}
+          />
+        </div>
+      </div>
+
       <Swiper
-        pagination={{
-          renderBullet: (_, className) => {
-            return `<span class="rounded-full transition ${className}"></span>`;
-          },
-        }}
         onSwiper={(swiper) => setSwiper(swiper)}
         spaceBetween={50}
         modules={[Pagination]}
@@ -84,12 +108,11 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
       >
         {urls.map((url, i) => (
           <SwiperSlide key={i} className="-z-10 relative h-full w-full">
-            <Image
-              fill
-              loading="eager"
-              className="-z-10 h-full w-full object-cover object-center"
+            <CustomImage
+              className="-z-10 h-full w-full object-cover object-center  aspect-square rounded-md"
               src={url}
               alt="Product image"
+              priority={true}
             />
           </SwiperSlide>
         ))}
