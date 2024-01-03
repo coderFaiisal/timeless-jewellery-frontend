@@ -2,17 +2,29 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import Loader from "@/components/loader";
+import { CircleLoader } from "react-spinners";
 
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 import { useGetAllBannersQuery } from "@/redux/api/banner/bannerApi";
 import { storeId } from "@/constants/storeId";
+import CustomImage from "@/components/customImage";
 
 const Banner = () => {
-  const { data = [] } = useGetAllBannersQuery(storeId);
+  const { data: banners = [], isLoading } = useGetAllBannersQuery(storeId);
+
+  if (isLoading) {
+    return (
+      <Loader className="min-h-screen w-full">
+        <CircleLoader color="#36d7b7" />
+      </Loader>
+    );
+  }
 
   return (
     <Swiper
@@ -29,19 +41,15 @@ const Banner = () => {
       modules={[Pagination, Autoplay]}
       className="mySwiper w-full h-full cursor-pointer"
     >
-      {data?.map((item: any) => (
-        <SwiperSlide key={item?.name}>
+      {banners?.map((banner: any) => (
+        <SwiperSlide key={banner?.label}>
           <div className="p-4 sm:p-6 mb-4 lg:p-8 rounded-xl overflow-hidden">
-            <div
-              style={{ backgroundImage: `url(${item.imageURL})` }}
-              className="rounded-xl relative aspect-[2.4/1] overflow-hidden bg-cover bg-red-50"
-            >
-              <div className="h-full w-full flex flex-col justify-center items-center text-center">
-                <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
-                  {item.title}
-                </div>
-              </div>
-            </div>
+            <CustomImage
+              src={banner?.imageURL}
+              alt={banner?.label}
+              priority={true}
+              className=" aspect-[2.1/1] bg-cover"
+            />
           </div>
         </SwiperSlide>
       ))}

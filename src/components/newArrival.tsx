@@ -1,13 +1,11 @@
 "use client";
 
 import { useGetAllProductsQuery } from "@/redux/api/product/productApi";
-import CustomImage from "./customImage";
 import { storeId } from "@/constants/storeId";
+import ImageSlider from "./imageSlider";
 
 const NewArrival = () => {
   const { data: products = [] } = useGetAllProductsQuery(storeId);
-
-  console.log(products);
 
   return (
     <div className=" min-h-96 my-6 lg:my-12">
@@ -21,14 +19,12 @@ const NewArrival = () => {
         {products?.map((product: any) => (
           <div key={product?.title}>
             <div className="">
-              <CustomImage
-                src={product?.images[0]}
-                alt="feature image"
-                className="w-full h-60 lg:h-56"
-              />
+              <ImageSlider urls={product?.images} />
             </div>
             <div className="mt-2 text-center">
-              <h1 className="text-sm opacity-60">{product?.categoryId?.name}</h1>
+              <h1 className="text-sm opacity-60">
+                {product?.categoryId?.name}
+              </h1>
               <h1>{product?.name}</h1>
               <p>$ {product?.price}</p>
             </div>
