@@ -10,27 +10,11 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CustomImage from "./customImage";
 
-import { MouseEventHandler } from "react";
-import { Expand, ShoppingCart } from "lucide-react";
-import IconButton from "./ui/iconButton";
-
 interface ImageSliderProps {
   urls: string[];
 }
 
 const ImageSlider = ({ urls }: ImageSliderProps) => {
-  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-
-    // previewModal.onOpen(data);
-  };
-
-  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation();
-
-    // cart.addItem(data);
-  };
-
   const [swiper, setSwiper] = useState<null | SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -50,7 +34,7 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
   }, [swiper, urls]);
 
   const activeStyles =
-    "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-50 place-items-center rounded-full border-2 bg-white border-zinc-300";
+    "active:scale-[0.97] grid opacity-100 hover:scale-105 absolute top-1/2 -translate-y-1/2 aspect-square h-8 w-8 z-40 place-items-center rounded-full border-2 bg-white border-zinc-300";
   const inactiveStyles = "hidden text-gray-400";
 
   return (
@@ -82,21 +66,8 @@ const ImageSlider = ({ urls }: ImageSliderProps) => {
           })}
           aria-label="previous image"
         >
-          <ChevronLeft className="h-4 w-4 text-zinc-700" />{" "}
+          <ChevronLeft className="h-4 w-4 text-zinc-700" />
         </button>
-      </div>
-
-      <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5 z-10">
-        <div className="flex gap-x-6 justify-center">
-          <IconButton
-            onClick={onPreview}
-            icon={<Expand size={20} className="text-gray-600" />}
-          />
-          <IconButton
-            onClick={onAddToCart}
-            icon={<ShoppingCart size={20} className="text-gray-600" />}
-          />
-        </div>
       </div>
 
       <Swiper
