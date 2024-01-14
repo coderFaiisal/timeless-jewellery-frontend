@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
-import { Button } from "./ui/button";
 
 const GoToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,9 +31,9 @@ const GoToTop = () => {
       {isVisible && (
         <button
           onClick={goToBtn}
-          className=" fixed bottom-8  right-8 md:bottom-16 md:right-16 z-50 w-10 h-10  bg-[#81d8d0] rounded-full flex justify-center items-center cursor-pointer transition-opacity duration-300 hover:opacity-75"
+          className="fixed bottom-8 right-8 md:bottom-16 md:right-16 z-50 w-10 h-10 bg-black text-white hover:bg-[#36d7b7] ease-linear duration-200 rounded-full flex justify-center items-center cursor-pointer"
         >
-          <ArrowUp className="w-8 hover:w-6 hover:h-6 h-8 p-1 text-white ease-in duration-300" />
+          <ArrowUp className="w-7 h-7 p-1 " />
         </button>
       )}
     </>
