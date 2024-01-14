@@ -3,7 +3,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import Loader from "@/components/loader";
-import { CircleLoader } from "react-spinners";
 
 import { Autoplay } from "swiper/modules";
 
@@ -19,11 +18,7 @@ const Banner = () => {
   const { data: banners = [], isLoading } = useGetAllBannersQuery(storeId);
 
   if (isLoading) {
-    return (
-      <Loader className="min-h-screen w-full">
-        <CircleLoader color="#36d7b7" />
-      </Loader>
-    );
+    return <Loader className="min-h-screen w-full" />;
   }
 
   return (

@@ -1,14 +1,13 @@
 import { cn } from "@/lib/utils";
 
 interface ILoaderProps {
-  children: React.ReactNode;
   className: string;
 }
 
-const Loader = ({ children, className }: ILoaderProps) => {
+const Loader = ({ className }: ILoaderProps) => {
   return (
     <div className={cn("flex items-center justify-center", className)}>
-      {children}
+      <div className="w-7 h-7 animate-[spin_1.5s_linear_infinite] rounded-full border-8 border-dotted border-[#36d7b7]"></div>
     </div>
   );
 };

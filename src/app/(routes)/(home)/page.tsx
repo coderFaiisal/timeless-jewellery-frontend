@@ -9,7 +9,6 @@ import { storeId } from "@/constants/storeId";
 import { useGetAllProductsQuery } from "@/redux/api/product/productApi";
 import Banner from "./components/banner";
 import Policies from "./components/policies";
-import { Modal } from "@/components/ui/modal";
 
 const HomePage = () => {
   const { data } = useGetAllProductsQuery(storeId);

@@ -19,7 +19,6 @@ import { Input } from "./ui/input";
 import ImageUpload from "./imageUpload";
 import { Button } from "./ui/button";
 import Loader from "./loader";
-import { RingLoader } from "react-spinners";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 
@@ -198,9 +197,7 @@ const SignUp = () => {
             {loading ? (
               <>
                 Sign Up
-                <Loader className="h-full w-full">
-                  <RingLoader color="#ffffff" size={30} />
-                </Loader>
+                <Loader className="h-full w-full" />
               </>
             ) : (
               "Sign Up"
